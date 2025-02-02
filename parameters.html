@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Password Generator Parameters</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/flowbite@3.1.1/dist/flowbite.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Noktaları kırmızı yapıyoruz */
+      ul li::marker {
+        color: red;
+      }
+    </style>
+  </head>
+  <body class="bg-[#F0F2F5]">
+    <div class="min-h-screen flex flex-col items-center justify-center">
+      <div
+        class="bg-white p-8 rounded-lg shadow-lg w-full h-screen md:h-full lg:h-auto lg:w-1/2"
+      >
+        <div
+          class="w-full flex justify-between items-center border-b pb-4 mb-6"
+        >
+          <h2 class="text-2xl lg:text-3xl font-semibold">Parameters</h2>
+        </div>
+
+        <div>
+          <div class="flex flex-col gap-6">
+            <!-- Seçenekler -->
+            <ul class="list-disc ml-6 flex flex-col gap-6">
+              <li>passwordLength, // ( karakter sayisi, 6-2048 )</li>
+              <li>includeSymbols, // ( orn: @#$% )</li>
+              <li>includeNumbers, // ( orn: 123456 )</li>
+              <li>includeLowercaseCharacters, // ( orn: abcdefgh )</li>
+              <li>includeUppercaseCharacters, // ( orn: ABCDEFGH )</li>
+              <li>excludeSimilarCharacters, // ( orn: i, l, 1, L, o, 0, O )</li>
+              <li>
+                excludeAmbiguousCharacters, // ( orn: { } [ ] ( ) / \ ' " ` ~ ,
+                ; : . < > )
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.1/dist/flowbite.min.js"></script>
+  </body>
+</html>
