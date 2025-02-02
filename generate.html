@@ -26,18 +26,26 @@
         class="bg-white p-8 rounded-lg shadow-lg w-full h-screen lg:h-auto lg:w-1/2"
       >
         <div
-          class="w-full flex justify-between items-center border-b pb-4 mb-6"
+          class="w-full flex flex-col md:flex-row gap-4 justify-between items-center border-b pb-4 mb-6"
         >
-          <h2 class="text-2xl lg:text-3xl font-semibold text-center mx-auto">
-            Password
-          </h2>
+          <h2 class="text-2xl lg:text-3xl font-semibold">Password</h2>
+          <div class="flex gap-4">
+            <a
+              id="regenerate"
+              href="index.html"
+              type="button"
+              class="hidden text-white bg-red-500 hover:bg-red-600 focus:ring-2 focus:outline-none focus:ring-red-500 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center me-2"
+            >
+              Regenerate
+            </a>
+          </div>
         </div>
 
         <div>
           <div
-            class="flex flex-col gap-6 text-center mx-auto justify-center items-center"
+            class="flex flex-col gap-6 text-center justify-center items-center"
           >
-            <!-- Seçenekler -->
+            <!-- Result -->
             <div class="grid grid-cols-8 gap-2 w-full max-w-[23rem]">
               <label for="password" class="sr-only">Label</label>
               <input
@@ -50,7 +58,7 @@
               />
               <button
                 data-copy-to-clipboard-target="password"
-                class="col-span-2 text-white bg-red-500 hover:bg-red-600 focus:ring-2 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto py-2.5 text-center items-center inline-flex justify-center"
+                class="col-span-2 text-white bg-red-500 hover:bg-red-600 focus:ring-2 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2 text-center items-center inline-flex justify-center"
               >
                 <span id="default-message">Copy</span>
                 <span id="success-message" class="hidden">
@@ -81,5 +89,28 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.1/dist/flowbite.min.js"></script>
+    <script>
+      window.addEventListener("load", function () {
+        const clipboard = FlowbiteInstances.getInstance(
+          "CopyClipboard",
+          "password"
+        );
+        const $defaultMessage = document.getElementById("default-message");
+        const $successMessage = document.getElementById("success-message");
+        const $regenerate = document.getElementById("regenerate");
+
+        clipboard.updateOnCopyCallback((clipboard) => {
+          $defaultMessage.classList.add("hidden");
+          $successMessage.classList.remove("hidden");
+          $regenerate.classList.remove("hidden");
+
+          // reset to default state
+          setTimeout(() => {
+            $defaultMessage.classList.remove("hidden");
+            $successMessage.classList.add("hidden");
+          }, 2000);
+        });
+      });
+    </script>
   </body>
 </html>
