@@ -1,224 +1,141 @@
 <!DOCTYPE html>
 <html lang="tr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-    />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Password Generator</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      href="https://cdn.jsdelivr.net/npm/flowbite@3.1.1/dist/flowbite.min.css"
-      rel="stylesheet"
-    />
-  </head>
-  <body class="bg-[#F0F2F5]">
-    <div class="min-h-screen flex flex-col items-center justify-center">
-      <div
-        class="bg-white p-8 rounded-lg shadow-lg w-full h-screen md:h-full lg:h-auto lg:w-1/2"
-      >
-        <div
-          class="w-full flex flex-col md:flex-row gap-4 justify-between items-center border-b pb-4 mb-6"
-        >
-          <h2 class="text-2xl lg:text-3xl font-semibold">
-            Customize your password
-          </h2>
-          <div class="flex gap-4">
-            <button
-              class="p-2 text-sm bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg"
-            >
-              <a href="docs.html">Documentation</a>
-            </button>
-          </div>
-        </div>
-
-        <div>
-          <div class="flex flex-col gap-6">
-            <div class="mb-6">
-              <label
-                for="passwordLength"
-                class="block font-medium text-gray-700 mb-4"
-                >Password Length</label
-              >
-              <div class="flex items-center space-x-4 bg-white p-4">
-                <input
-                  id="passwordLength"
-                  name="passwordLength"
-                  type="number"
-                  value="12"
-                  min="6"
-                  max="2048"
-                  class="w-32 border border-gray-300 rounded-md p-2 text-center"
-                />
-                <input
-                  id="passwordRange"
-                  type="range"
-                  min="6"
-                  max="128"
-                  value="12"
-                  class="flex-1 bg-red-500 h-2 rounded-full cursor-pointer"
-                />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Password Generator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="./style.css" rel="stylesheet" />
+</head>
+<body class="bg-[#F0F2F5]">
+  <div class="min-h-screen flex flex-col items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full h-screen md:h-full lg:h-auto lg:w-1/2">
+      <div class="w-full gap-4 border-b pb-4">
+        <h2 class="text-2xl lg:text-3xl font-semibold">Password Generator</h2>
+        <p class="mt-4">Generate unlimited and secure password.</p>
+      </div>
+      <div>
+        <div class="flex flex-col gap-6 py-6">
+          <div class="w-2/3">
+            <label class="block text-sm font-medium text-gray-500 mb-3">
+              Length:<span id="rangeValue" class="ml-1">12</span>
+            </label>
+            <div class="flex items-center space-x-4 bg-white">
+              <input id="passwordRange" type="range" min="6" max="128" value="12"
+                class="flex-1 bg-red-500 h-2 rounded-full cursor-pointer" />
+              <div class="flex gap-0.5">
+                <button id="decrease"
+                  class="font-bold hover:bg-[#F0F2F5] text-gray-500 px-2 h-7 rounded-md flex items-center justify-center text-center">
+                  &lt;
+                </button>
+                <button id="increase"
+                  class="font-bold hover:bg-[#F0F2F5] text-gray-500 px-2 h-7 rounded-md flex items-center justify-center text-center">
+                  &gt;
+                </button>
               </div>
             </div>
-
-            <!-- Seçenekler -->
-            <div class="grid md:grid-cols-2 gap-8 ml-6 lg:ml-8 mb-6">
-              <label
-                class="flex items-center cursor-pointer"
-                data-tooltip-target="tooltip-symbols"
-              >
-                <input
-                  type="checkbox"
-                  name="includeSymbols"
-                  id="includeSymbols"
-                  class="w-6 h-6 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-blue-300 mr-6"
-                />
-                Include Symbols
-              </label>
-              <label
-                class="flex items-center cursor-pointer"
-                data-tooltip-target="tooltip-numbers"
-              >
-                <input
-                  type="checkbox"
-                  name="includeNumbers"
-                  id="includeNumbers"
-                  class="w-6 h-6 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-blue-300 mr-6"
-                  checked
-                />
-                Include Numbers
-              </label>
-              <label
-                class="flex items-center cursor-pointer"
-                data-tooltip-target="tooltip-lowercase"
-              >
-                <input
-                  type="checkbox"
-                  name="includeLowercaseCharacters"
-                  id="includeLowercaseCharacters"
-                  class="w-6 h-6 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-blue-300 mr-6"
-                  checked
-                />
-                Include Lowercase
-              </label>
-              <label
-                class="flex items-center cursor-pointer"
-                data-tooltip-target="tooltip-uppercase"
-              >
-                <input
-                  type="checkbox"
-                  name="includeUppercaseCharacters"
-                  id="includeUppercaseCharacters"
-                  class="w-6 h-6 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-blue-300 mr-6"
-                  checked
-                />
-                Include Uppercase
-              </label>
-              <label
-                class="flex items-center cursor-pointer"
-                data-tooltip-target="tooltip-similar"
-              >
-                <input
-                  type="checkbox"
-                  name="excludeSimilarCharacters"
-                  id="excludeSimilarCharacters"
-                  class="w-6 h-6 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-blue-300 mr-6"
-                  checked
-                />
-                Exclude Similar
-              </label>
-              <label
-                class="flex items-center cursor-pointer"
-                data-tooltip-target="tooltip-ambiguous"
-              >
-                <input
-                  type="checkbox"
-                  name="excludeAmbiguousCharacters"
-                  id="excludeAmbiguousCharacters"
-                  class="w-6 h-6 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-blue-300 mr-6"
-                />
-                Exclude Ambiguous
-              </label>
-            </div>
-          </div>
-          <div class="flex gap-8 w-full">
-            <a
-              href="/generate.html"
-              type="submit"
-              class="mt-6 w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg text-center items-center"
-            >
-              Oluştur
-            </a>
           </div>
         </div>
+        <!-- Seçenekler -->
+        <div class="grid md:grid-cols-2 md:grid-rows-3 gap-4 pb-4">
+          <label class="inline-flex items-center me-5 cursor-pointer">
+            <input type="checkbox" value="1" class="sr-only peer" checked />
+            <div
+              class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-0 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-black">
+            </div>
+            <span class="ms-3 text-sm font-medium text-gray-500" data-tooltip-target="tooltip-symbols">Include
+              Symbols</span>
+          </label>
+          <label class="inline-flex items-center me-5 cursor-pointer">
+            <input type="checkbox" value="" class="sr-only peer" checked />
+            <div
+              class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-0 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-black">
+            </div>
+            <span class="ms-3 text-sm font-medium text-gray-500" data-tooltip-target="tooltip-numbers">Include
+              Numbers</span>
+          </label>
+          <label class="inline-flex items-center me-5 cursor-pointer">
+            <input type="checkbox" value="" class="sr-only peer" checked />
+            <div
+              class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-0 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-black">
+            </div>
+            <span class="ms-3 text-sm font-medium text-gray-500" data-tooltip-target="tooltip-lowercase">Include
+              Lowercase</span>
+          </label>
+          <label class="inline-flex items-center me-5 cursor-pointer">
+            <input type="checkbox" value="" class="sr-only peer" checked />
+            <div
+              class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-0 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-black">
+            </div>
+            <span class="ms-3 text-sm font-medium text-gray-500" data-tooltip-target="tooltip-uppercase">Include
+              Uppercase</span>
+          </label>
+          <label class="inline-flex items-center me-5 cursor-pointer">
+            <input type="checkbox" value="" class="sr-only peer" />
+            <div
+              class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-0 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-black">
+            </div>
+            <span class="ms-3 text-sm font-medium text-gray-500" data-tooltip-target="tooltip-similar">Exclude
+              Similar</span>
+          </label>
+          <label class="inline-flex items-center me-5 cursor-pointer">
+            <input type="checkbox" value="" class="sr-only peer" checked />
+            <div
+              class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-0 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-black">
+            </div>
+            <span class="ms-3 text-sm font-medium text-gray-500" data-tooltip-target="tooltip-ambiguous">Exclude
+              Ambiguous</span>
+          </label>
+        </div>
+      </div>
+      <div class="flex gap-4 w-full">
+        <a href="/generate.html" type="submit"
+          class="mt-6 w-40 bg-black hover:bg-black/80 transition duration-200 text-white py-2 rounded-lg text-center items-center">
+          Generate
+        </a>
+        <button type="submit" id="generate-copy-button"
+          class="mt-6 w-40 bg-[#34c75a] hover:bg-[#2aa24a] transition duration-200 text-white py-2 rounded-lg text-center items-center">
+          Generate & Copy
+        </button>
       </div>
     </div>
-    <div
-      id="tooltip-symbols"
-      role="tooltip"
-      class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip"
-    >
-      (e.g. @#$%)
+  </div>
+  </div>
+  <!-- Tooltips -->
+  <div id="tooltip-symbols" role="tooltip"
+    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip">
+    (e.g. @#$%)
+    <div class="tooltip-arrow" data-popper-arrow></div>
+  </div>
+  <div id="tooltip-numbers" role="tooltip"
+    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip">
+    (e.g. 123456)
+    <div class="tooltip-arrow" data-popper-arrow></div>
+  </div>
+  <div id="tooltip-lowercase" role="tooltip"
+    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip">
+    (e.g. abcdefgh)
+    <div class="tooltip-arrow" data-popper-arrow></div>
+  </div>
+  <div id="tooltip-uppercase" role="tooltip"
+    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip">
+    (e.g. ABCDEFGH)
+    <div class="tooltip-arrow" data-popper-arrow></div>
+  </div>
+  <div id="tooltip-similar" role="tooltip"
+    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip">
+    (e.g. i, l, 1, L, o, 0, O)
+    <div class="tooltip-arrow" data-popper-arrow></div>
+  </div>
+  <div id="tooltip-ambiguous" role="tooltip"
+    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip">
+    (e.g. {} [] () / \ ' " ` ~ , ; : . <>)
       <div class="tooltip-arrow" data-popper-arrow></div>
-    </div>
-    <div
-      id="tooltip-numbers"
-      role="tooltip"
-      class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip"
-    >
-      (e.g. 123456)
-      <div class="tooltip-arrow" data-popper-arrow></div>
-    </div>
-    <div
-      id="tooltip-lowercase"
-      role="tooltip"
-      class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip"
-    >
-      (e.g. abcdefgh)
-      <div class="tooltip-arrow" data-popper-arrow></div>
-    </div>
-    <div
-      id="tooltip-uppercase"
-      role="tooltip"
-      class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip"
-    >
-      (e.g. ABCDEFGH)
-      <div class="tooltip-arrow" data-popper-arrow></div>
-    </div>
-    <div
-      id="tooltip-similar"
-      role="tooltip"
-      class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip"
-    >
-      (e.g. i, l, 1, L, o, 0, O)
-      <div class="tooltip-arrow" data-popper-arrow></div>
-    </div>
-    <div
-      id="tooltip-ambiguous"
-      role="tooltip"
-      class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip"
-    >
-      (e.g. {} [] () / \ ' " ` ~ , ; : . <>)
-      <div class="tooltip-arrow" data-popper-arrow></div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.1/dist/flowbite.min.js"></script>
-
-    <script>
-      const numberInput = document.getElementById("passwordLength");
-      const rangeInput = document.getElementById("passwordRange");
-
-      numberInput.addEventListener("input", () => {
-        let value = parseInt(numberInput.value, 10);
-        if (value < 6) value = 6;
-        if (value > 128) value = 128;
-        rangeInput.value = value;
-      });
-
-      rangeInput.addEventListener("input", () => {
-        numberInput.value = rangeInput.value;
-      });
-    </script>
-  </body>
+  </div>
+  <!-- Tooltips End -->
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.1/dist/flowbite.min.js"></script>
+  <script src="./main.js"></script>
+</body>
 </html>
