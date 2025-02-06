@@ -112,6 +112,22 @@ function closeModal() {
     document.getElementById("password-modal").style.display = "none";
 }
 function openModal() {
-    document.getElementById("password-modal").style.display = "flex";
+    const modal = document.getElementById("password-modal");
+    const content = document.getElementById("password-content");
+    const skeleton = document.getElementById("password-skeleton");
+
+    if (modal.style.display === "flex") {
+        content.style.display = "none";
+        skeleton.style.display = "block";
+        setTimeout(() => {
+            content.style.display = "block";
+            skeleton.style.display = "none";
+        }, 700);
+    } else {
+        modal.style.display = "flex";
+
+
+    }
 }
+
 

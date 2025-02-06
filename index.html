@@ -25,7 +25,7 @@
               <label class="block text-sm font-medium text-gray-500 mb-3">
                 Length:<span id="rangeValue" class="ml-1">12</span>
               </label>
-              <div class="flex items-center space-x-4 bg-white">
+              <div class="flex items-center space-x-2 bg-white">
                 <input
                   id="passwordRange"
                   type="range"
@@ -55,7 +55,7 @@
           <div class="flex flex-col md:flex-row pb-4 gap-3 md:gap-24">
             <div class="grid grid-cols gap-3">
               <label class="inline-flex items-center me-5 cursor-pointer">
-                <input type="checkbox" value="1" class="sr-only peer" checked />
+                <input type="checkbox" value="1" class="sr-only peer" />
                 <div
                   class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-0 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-black"
                 ></div>
@@ -105,7 +105,7 @@
             </div>
             <div class="flex flex-col justify-start gap-3">
               <label class="inline-flex items-center me-5 cursor-pointer">
-                <input type="checkbox" value="" class="sr-only peer" />
+                <input type="checkbox" value="" class="sr-only peer" checked />
                 <div
                   class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-0 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-black"
                 ></div>
@@ -155,7 +155,10 @@
       id="password-modal"
       class="flex flex-col items-center justify-center pt-6 pb-12 hidden"
     >
-      <div class="bg-white p-8 rounded-lg shadow-lg w-full lg:w-1/2">
+      <div
+        id="password-content"
+        class="bg-white p-8 rounded-lg shadow-lg w-full lg:w-1/2 h-64"
+      >
         <div class="w-full gap-4 border-b pb-4">
           <div class="flex justify-between items-center">
             <h2 class="text-xl lg:text-2xl font-bold">
@@ -227,12 +230,36 @@
             </button>
           </div>
         </div>
-        <button
-          type="submit"
-          class="w-36 text-sm font-semibold bg-[#34c75a] hover:bg-[#2aa24a] transition duration-200 text-white py-2 rounded-md text-center items-center"
-        >
-          Save
-        </button>
+        <div class="flex gap-4">
+          <div>
+            <input
+              type="text"
+              id="success"
+              class="border border-black text-black placeholder-black text-sm rounded-md focus:ring-black focus:border-black block w-48 p-2"
+              placeholder="Password name"
+            />
+          </div>
+          <button
+            type="submit"
+            class="w-36 text-sm font-semibold bg-[#34c75a] hover:bg-[#2aa24a] transition duration-200 text-white py-2 rounded-md text-center items-center"
+          >
+            Save
+          </button>
+        </div>
+      </div>
+      <!--Skeleton-->
+      <div
+        id="password-skeleton"
+        class="bg-white p-8 rounded-lg shadow-lg w-full lg:w-1/2 hidden h-64"
+      >
+        <p class="h-4 bg-gray-200 rounded-full" style="width: 40%"></p>
+
+        <ul class="mt-5 space-y-3">
+          <li class="w-full h-4 bg-gray-200 rounded-full"></li>
+          <li class="w-full h-4 bg-gray-200 rounded-full"></li>
+          <li class="w-full h-4 bg-gray-200 rounded-full"></li>
+          <li class="w-full h-4 bg-gray-200 rounded-full"></li>
+        </ul>
       </div>
     </div>
 
@@ -242,7 +269,7 @@
       role="tooltip"
       class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip"
     >
-      (e.g. @#$%)
+      (example: @#$%)
       <div class="tooltip-arrow" data-popper-arrow></div>
     </div>
     <div
@@ -250,7 +277,7 @@
       role="tooltip"
       class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip"
     >
-      (e.g. 123456)
+      (example: 123456)
       <div class="tooltip-arrow" data-popper-arrow></div>
     </div>
     <div
@@ -258,7 +285,7 @@
       role="tooltip"
       class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip"
     >
-      (e.g. abcdefgh)
+      (example: abcdefgh)
       <div class="tooltip-arrow" data-popper-arrow></div>
     </div>
     <div
@@ -266,7 +293,7 @@
       role="tooltip"
       class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip"
     >
-      (e.g. ABCDEFGH)
+      (example: ABCDEFGH)
       <div class="tooltip-arrow" data-popper-arrow></div>
     </div>
     <div
@@ -274,7 +301,7 @@
       role="tooltip"
       class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip"
     >
-      (e.g. i, l, 1, L, o, 0, O)
+      (example: i, l, 1, L, o, 0, O)
       <div class="tooltip-arrow" data-popper-arrow></div>
     </div>
     <div
@@ -282,7 +309,7 @@
       role="tooltip"
       class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip"
     >
-      (e.g. {} [] () / \ ' " ` ~ , ; : . <>)
+      (example: {} [] () / \ ' " ` ~ , ; : . <>)
       <div class="tooltip-arrow" data-popper-arrow></div>
     </div>
     <!-- Tooltips End -->
