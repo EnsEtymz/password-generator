@@ -1,4 +1,3 @@
-// Range input ve diğer öğeleri al
 const rangeInput = document.getElementById("passwordRange");
 const decreaseButton = document.getElementById("decrease");
 const increaseButton = document.getElementById("increase");
@@ -13,14 +12,14 @@ function updateRangeFill() {
 
 // Range değeri için span içeriğini güncelleme fonksiyonu
 function updateRangeValue() {
-    rangeValueSpan.textContent = rangeInput.value;  // Span içeriğini güncelle
-    updateRangeFill(); // Dolguyu güncelle
+    rangeValueSpan.textContent = rangeInput.value;
+    updateRangeFill();
 }
 
 // Range inputu her değiştiğinde span'ı ve dolguyu güncelle
 rangeInput.addEventListener("input", updateRangeValue);
 
-// Azaltma butonuna tıklanınca
+// Azaltma butonu
 decreaseButton.addEventListener("click", () => {
     if (+rangeInput.value > +rangeInput.min) {
         rangeInput.value = parseInt(rangeInput.value) - 1;
@@ -28,7 +27,7 @@ decreaseButton.addEventListener("click", () => {
     }
 });
 
-// Arttırma butonuna tıklanınca
+// Arttırma butonu
 increaseButton.addEventListener("click", () => {
     if (+rangeInput.value < +rangeInput.max) {
         rangeInput.value = parseInt(rangeInput.value) + 1;
@@ -36,24 +35,24 @@ increaseButton.addEventListener("click", () => {
     }
 });
 
-// Azaltma butonuna basılı tutulduğunda sürekli azaltma
+// Azaltma butonuna basılı tutulduğunda 
 let decreaseInterval;
 decreaseButton.addEventListener("mousedown", () => {
     decreaseInterval = setInterval(() => {
         if (+rangeInput.value > +rangeInput.min) {
             rangeInput.value = parseInt(rangeInput.value) - 1;
-            updateRangeValue(); // Değer ve dolguyu güncelle
+            updateRangeValue();
         }
     }, 100); // Her 100ms'de bir azalt
 });
 
-// Arttırma butonuna basılı tutulduğunda sürekli arttırma
+// Arttırma butonuna basılı tutulduğunda 
 let increaseInterval;
 increaseButton.addEventListener("mousedown", () => {
     increaseInterval = setInterval(() => {
         if (+rangeInput.value < +rangeInput.max) {
             rangeInput.value = parseInt(rangeInput.value) + 1;
-            updateRangeValue(); // Değer ve dolguyu güncelle
+            updateRangeValue();
         }
     }, 100); // Her 100ms'de bir arttır
 });
@@ -87,4 +86,32 @@ generateCopyButton.addEventListener("click", (event) => {
         });
 });
 
+
+const copyButton = document.getElementById("copy-button");
+const copiedButton = document.getElementById("copied-button");
+const textToCopyb = document.getElementById("text-to-copy");
+
+copyButton.addEventListener("click", () => {
+    navigator.clipboard
+        .writeText(textToCopyb.textContent)
+        .then(() => {
+            copiedButton.classList.remove("hidden");
+            copyButton.classList.add("hidden");
+
+            setTimeout(() => {
+                copiedButton.classList.add("hidden");
+                copyButton.classList.remove("hidden");
+            }, 2000);
+        })
+        .catch((err) => {
+            console.error("Kopyalama işlemi başarısız oldu: ", err);
+        });
+});
+
+function closeModal() {
+    document.getElementById("password-modal").style.display = "none";
+}
+function openModal() {
+    document.getElementById("password-modal").style.display = "flex";
+}
 

@@ -1,80 +1,17 @@
 <!DOCTYPE html>
 <html lang="tr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport"
-    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Generated Your Password</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-[#F0F2F5]">
-  <div class="min-h-screen flex flex-col items-center justify-center">
-    <div class="bg-white p-8 rounded-lg shadow-lg w-full h-screen md:h-full lg:h-auto lg:w-1/2">
-      <div class="w-full gap-4 border-b pb-4">
-        <div class="flex justify-between items-center">
-          <h2 class="text-2xl lg:text-3xl font-semibold">Generated Your Password</h2>
-          <a href="index.html"
-            class="font-bold hover:bg-[#F0F2F5] text-gray-500 px-2 py-2 rounded-md flex items-center justify-center text-center">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-              stroke="currentColor" class="size-5 ">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-            </svg>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Generated Your Password</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
 
-          </a>
-        </div>
-        <p class="mt-4">You can copy and use your password.</p>
-      </div>
-      <div>
-        <div class="flex py-6">
-          <span id="text-to-copy">DHCI749JeGebDHCI749JeGeb</span>
-          <!-- Kopyalama butonu -->
-          <button id="copy-button" class="ml-4 hover:text-[#34c75a] transition duration-200">
-            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"
-              stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
-              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-            </svg>
-          </button>
-          <!-- Kopyalandı butonu -->
-          <button id="copied-button" class="ml-4 text-[#34c75a] hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-              stroke="currentColor" class="size-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-            </svg>
-          </button>
-        </div>
-      </div>
-      <div class="flex gap-4 w-full">
-        <button type="submit"
-          class="mt-6 w-40 bg-[#34c75a] hover:bg-[#2aa24a] transition duration-200 text-white py-2 rounded-lg text-center items-center">
-          Save
-        </button>
-      </div>
-    </div>
-  </div>
-  </div>
-  <script>
-    // Elemanları seç
-    const copyButton = document.getElementById("copy-button");
-    const copiedButton = document.getElementById("copied-button");
-    const textToCopy = document.getElementById("text-to-copy");
-
-    copyButton.addEventListener("click", () => {
-      navigator.clipboard.writeText(textToCopy.textContent)
-        .then(() => {
-          copiedButton.classList.remove("hidden");
-          copyButton.classList.add("hidden");
-
-          setTimeout(() => {
-            copiedButton.classList.add("hidden");
-            copyButton.classList.remove("hidden");
-          }, 2000);
-        })
-        .catch((err) => {
-          console.error("Kopyalama işlemi başarısız oldu: ", err);
-        });
-    });
-  </script>
-</body>
+  <body class="bg-[#F0F2F5]">
+    <script></script>
+  </body>
 </html>

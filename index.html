@@ -1,141 +1,296 @@
 <!DOCTYPE html>
 <html lang="tr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport"
-    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Password Generator</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="./style.css" rel="stylesheet" />
-</head>
-<body class="bg-[#F0F2F5]">
-  <div class="min-h-screen flex flex-col items-center justify-center">
-    <div class="bg-white p-8 rounded-lg shadow-lg w-full h-screen md:h-full lg:h-auto lg:w-1/2">
-      <div class="w-full gap-4 border-b pb-4">
-        <h2 class="text-2xl lg:text-3xl font-semibold">Password Generator</h2>
-        <p class="mt-4">Generate unlimited and secure password.</p>
-      </div>
-      <div>
-        <div class="flex flex-col gap-6 py-6">
-          <div class="w-2/3">
-            <label class="block text-sm font-medium text-gray-500 mb-3">
-              Length:<span id="rangeValue" class="ml-1">12</span>
-            </label>
-            <div class="flex items-center space-x-4 bg-white">
-              <input id="passwordRange" type="range" min="6" max="128" value="12"
-                class="flex-1 bg-red-500 h-2 rounded-full cursor-pointer" />
-              <div class="flex gap-0.5">
-                <button id="decrease"
-                  class="font-bold hover:bg-[#F0F2F5] text-gray-500 px-2 h-7 rounded-md flex items-center justify-center text-center">
-                  &lt;
-                </button>
-                <button id="increase"
-                  class="font-bold hover:bg-[#F0F2F5] text-gray-500 px-2 h-7 rounded-md flex items-center justify-center text-center">
-                  &gt;
-                </button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Password Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="./style.css" rel="stylesheet" />
+  </head>
+
+  <body class="bg-[#F0F2F5]">
+    <div class="flex flex-col items-center justify-center pt-12">
+      <div
+        class="bg-white p-8 rounded-lg shadow-lg w-full h-screen md:h-full lg:h-auto lg:w-1/2"
+      >
+        <div class="w-full gap-4 border-b pb-4">
+          <h2 class="text-xl lg:text-2xl font-bold">Password Generator</h2>
+          <p class="mt-2">Generate unlimited and secure password.</p>
+        </div>
+        <div>
+          <div class="flex flex-col gap-6 py-6">
+            <div class="w-5/6 md:w-2/3">
+              <label class="block text-sm font-medium text-gray-500 mb-3">
+                Length:<span id="rangeValue" class="ml-1">12</span>
+              </label>
+              <div class="flex items-center space-x-4 bg-white">
+                <input
+                  id="passwordRange"
+                  type="range"
+                  min="6"
+                  max="128"
+                  value="12"
+                  class="flex-1 bg-red-500 h-2 rounded-full cursor-pointer"
+                />
+                <div class="flex gap-0.5">
+                  <button
+                    id="decrease"
+                    class="font-bold hover:bg-[#F0F2F5] text-gray-500 px-2 h-7 rounded-md flex items-center justify-center text-center"
+                  >
+                    &lt;
+                  </button>
+                  <button
+                    id="increase"
+                    class="font-bold hover:bg-[#F0F2F5] text-gray-500 px-2 h-7 rounded-md flex items-center justify-center text-center"
+                  >
+                    &gt;
+                  </button>
+                </div>
               </div>
             </div>
           </div>
+          <!-- Seçenekler -->
+          <div class="flex flex-col md:flex-row pb-4 gap-3 md:gap-24">
+            <div class="grid grid-cols gap-3">
+              <label class="inline-flex items-center me-5 cursor-pointer">
+                <input type="checkbox" value="1" class="sr-only peer" checked />
+                <div
+                  class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-0 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-black"
+                ></div>
+                <span
+                  class="ms-3 text-sm font-medium text-gray-500"
+                  data-tooltip-target="tooltip-symbols"
+                  data-tooltip-placement="right"
+                  >Include Symbols</span
+                >
+              </label>
+              <label class="inline-flex items-center me-5 cursor-pointer">
+                <input type="checkbox" value="" class="sr-only peer" checked />
+                <div
+                  class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-0 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-black"
+                ></div>
+                <span
+                  class="ms-3 text-sm font-medium text-gray-500"
+                  data-tooltip-target="tooltip-numbers"
+                  data-tooltip-placement="right"
+                  >Include Numbers</span
+                >
+              </label>
+              <label class="inline-flex items-center me-5 cursor-pointer">
+                <input type="checkbox" value="" class="sr-only peer" checked />
+                <div
+                  class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-0 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-black"
+                ></div>
+                <span
+                  class="ms-3 text-sm font-medium text-gray-500"
+                  data-tooltip-target="tooltip-lowercase"
+                  data-tooltip-placement="right"
+                  >Include Lowercase</span
+                >
+              </label>
+              <label class="inline-flex items-center me-5 cursor-pointer">
+                <input type="checkbox" value="" class="sr-only peer" checked />
+                <div
+                  class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-0 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-black"
+                ></div>
+                <span
+                  class="ms-3 text-sm font-medium text-gray-500"
+                  data-tooltip-target="tooltip-uppercase"
+                  data-tooltip-placement="right"
+                  >Include Uppercase</span
+                >
+              </label>
+            </div>
+            <div class="flex flex-col justify-start gap-3">
+              <label class="inline-flex items-center me-5 cursor-pointer">
+                <input type="checkbox" value="" class="sr-only peer" />
+                <div
+                  class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-0 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-black"
+                ></div>
+                <span
+                  class="ms-3 text-sm font-medium text-gray-500"
+                  data-tooltip-target="tooltip-similar"
+                  data-tooltip-placement="right"
+                  >Exclude Similar</span
+                >
+              </label>
+              <label class="inline-flex items-center me-5 cursor-pointer">
+                <input type="checkbox" value="" class="sr-only peer" checked />
+                <div
+                  class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-0 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-black"
+                ></div>
+                <span
+                  class="ms-3 text-sm font-medium text-gray-500"
+                  data-tooltip-target="tooltip-ambiguous"
+                  data-tooltip-placement="right"
+                  >Exclude Ambiguous</span
+                >
+              </label>
+            </div>
+          </div>
         </div>
-        <!-- Seçenekler -->
-        <div class="grid md:grid-cols-2 md:grid-rows-3 gap-4 pb-4">
-          <label class="inline-flex items-center me-5 cursor-pointer">
-            <input type="checkbox" value="1" class="sr-only peer" checked />
-            <div
-              class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-0 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-black">
-            </div>
-            <span class="ms-3 text-sm font-medium text-gray-500" data-tooltip-target="tooltip-symbols">Include
-              Symbols</span>
-          </label>
-          <label class="inline-flex items-center me-5 cursor-pointer">
-            <input type="checkbox" value="" class="sr-only peer" checked />
-            <div
-              class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-0 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-black">
-            </div>
-            <span class="ms-3 text-sm font-medium text-gray-500" data-tooltip-target="tooltip-numbers">Include
-              Numbers</span>
-          </label>
-          <label class="inline-flex items-center me-5 cursor-pointer">
-            <input type="checkbox" value="" class="sr-only peer" checked />
-            <div
-              class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-0 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-black">
-            </div>
-            <span class="ms-3 text-sm font-medium text-gray-500" data-tooltip-target="tooltip-lowercase">Include
-              Lowercase</span>
-          </label>
-          <label class="inline-flex items-center me-5 cursor-pointer">
-            <input type="checkbox" value="" class="sr-only peer" checked />
-            <div
-              class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-0 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-black">
-            </div>
-            <span class="ms-3 text-sm font-medium text-gray-500" data-tooltip-target="tooltip-uppercase">Include
-              Uppercase</span>
-          </label>
-          <label class="inline-flex items-center me-5 cursor-pointer">
-            <input type="checkbox" value="" class="sr-only peer" />
-            <div
-              class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-0 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-black">
-            </div>
-            <span class="ms-3 text-sm font-medium text-gray-500" data-tooltip-target="tooltip-similar">Exclude
-              Similar</span>
-          </label>
-          <label class="inline-flex items-center me-5 cursor-pointer">
-            <input type="checkbox" value="" class="sr-only peer" checked />
-            <div
-              class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-0 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-black">
-            </div>
-            <span class="ms-3 text-sm font-medium text-gray-500" data-tooltip-target="tooltip-ambiguous">Exclude
-              Ambiguous</span>
-          </label>
+        <div class="flex gap-4 w-full pt-2">
+          <button
+            type="button"
+            onclick="openModal()"
+            class="w-36 font-semibold text-sm bg-black hover:bg-black/80 transition duration-200 text-white py-2 rounded-md text-center items-center"
+          >
+            Generate
+          </button>
+          <button
+            type="button"
+            onclick="openModal()"
+            id="generate-copy-button"
+            class="w-36 text-sm font-semibold bg-[#34c75a] hover:bg-[#2aa24a] transition duration-200 text-white py-2 rounded-md text-center items-center"
+          >
+            Generate & Copy
+          </button>
         </div>
       </div>
-      <div class="flex gap-4 w-full">
-        <a href="/generate.html" type="submit"
-          class="mt-6 w-40 bg-black hover:bg-black/80 transition duration-200 text-white py-2 rounded-lg text-center items-center">
-          Generate
-        </a>
-        <button type="submit" id="generate-copy-button"
-          class="mt-6 w-40 bg-[#34c75a] hover:bg-[#2aa24a] transition duration-200 text-white py-2 rounded-lg text-center items-center">
-          Generate & Copy
+    </div>
+
+    <div
+      id="password-modal"
+      class="flex flex-col items-center justify-center pt-6 pb-12"
+    >
+      <div
+        class="bg-white p-8 rounded-lg shadow-lg w-full h-screen md:h-full lg:h-auto lg:w-1/2"
+      >
+        <div class="w-full gap-4 border-b pb-4">
+          <div class="flex justify-between items-center">
+            <h2 class="text-xl lg:text-2xl font-bold">
+              Generated Your Password
+            </h2>
+            <button
+              onclick="closeModal()"
+              class="font-bold hover:bg-[#F0F2F5] text-gray-500 px-2 py-2 rounded-md flex items-center justify-center text-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                class="size-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 18 18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+          <p class="mt-2">You can copy and use your password.</p>
+        </div>
+        <div>
+          <div class="flex py-6">
+            <span id="text-to-copy">DHCI749JeGebDHCI749JeGeb</span>
+            <!-- Kopyalama butonu -->
+            <button
+              id="copy-button"
+              class="ml-4 hover:text-[#34c75a] transition duration-200"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="css-i6dzq1"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path
+                  d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                ></path>
+              </svg>
+            </button>
+            <!-- Kopyalandı butonu -->
+            <button id="copied-button" class="ml-4 text-[#34c75a] hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m4.5 12.75 6 6 9-13.5"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="w-36 text-sm font-semibold bg-[#34c75a] hover:bg-[#2aa24a] transition duration-200 text-white py-2 rounded-md text-center items-center"
+        >
+          Save
         </button>
       </div>
     </div>
-  </div>
-  </div>
-  <!-- Tooltips -->
-  <div id="tooltip-symbols" role="tooltip"
-    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip">
-    (e.g. @#$%)
-    <div class="tooltip-arrow" data-popper-arrow></div>
-  </div>
-  <div id="tooltip-numbers" role="tooltip"
-    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip">
-    (e.g. 123456)
-    <div class="tooltip-arrow" data-popper-arrow></div>
-  </div>
-  <div id="tooltip-lowercase" role="tooltip"
-    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip">
-    (e.g. abcdefgh)
-    <div class="tooltip-arrow" data-popper-arrow></div>
-  </div>
-  <div id="tooltip-uppercase" role="tooltip"
-    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip">
-    (e.g. ABCDEFGH)
-    <div class="tooltip-arrow" data-popper-arrow></div>
-  </div>
-  <div id="tooltip-similar" role="tooltip"
-    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip">
-    (e.g. i, l, 1, L, o, 0, O)
-    <div class="tooltip-arrow" data-popper-arrow></div>
-  </div>
-  <div id="tooltip-ambiguous" role="tooltip"
-    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip">
-    (e.g. {} [] () / \ ' " ` ~ , ; : . <>)
+
+    <!-- Tooltips -->
+    <div
+      id="tooltip-symbols"
+      role="tooltip"
+      class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip"
+    >
+      (e.g. @#$%)
       <div class="tooltip-arrow" data-popper-arrow></div>
-  </div>
-  <!-- Tooltips End -->
-  <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.1/dist/flowbite.min.js"></script>
-  <script src="./main.js"></script>
-</body>
+    </div>
+    <div
+      id="tooltip-numbers"
+      role="tooltip"
+      class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip"
+    >
+      (e.g. 123456)
+      <div class="tooltip-arrow" data-popper-arrow></div>
+    </div>
+    <div
+      id="tooltip-lowercase"
+      role="tooltip"
+      class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip"
+    >
+      (e.g. abcdefgh)
+      <div class="tooltip-arrow" data-popper-arrow></div>
+    </div>
+    <div
+      id="tooltip-uppercase"
+      role="tooltip"
+      class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip"
+    >
+      (e.g. ABCDEFGH)
+      <div class="tooltip-arrow" data-popper-arrow></div>
+    </div>
+    <div
+      id="tooltip-similar"
+      role="tooltip"
+      class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip"
+    >
+      (e.g. i, l, 1, L, o, 0, O)
+      <div class="tooltip-arrow" data-popper-arrow></div>
+    </div>
+    <div
+      id="tooltip-ambiguous"
+      role="tooltip"
+      class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip"
+    >
+      (e.g. {} [] () / \ ' " ` ~ , ; : . <>)
+      <div class="tooltip-arrow" data-popper-arrow></div>
+    </div>
+    <!-- Tooltips End -->
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.1/dist/flowbite.min.js"></script>
+    <script src="./main.js"></script>
+  </body>
 </html>
