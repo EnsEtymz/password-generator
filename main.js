@@ -1,22 +1,72 @@
 const rangeInput = document.getElementById("passwordRange");
 const decreaseButton = document.getElementById("decrease");
 const increaseButton = document.getElementById("increase");
-const rangeValueSpan = document.getElementById("rangeValue");
+const rangeValueInput = document.getElementById("rangeValue");
+const includeUppercase = document.getElementById("includeUppercase");
+const includeNumbers = document.getElementById("includeNumbers");
+const includeSymbols = document.getElementById("includeSymbols");
+const includeLowercase = document.getElementById("includeLowercase");
+const excludeSimilar = document.getElementById("excludeSimilar");
+const excludeAmbiguous = document.getElementById("excludeAmbiguous");
 
-// Range değeri için dolgu (fill) güncelleme fonksiyonu
+function getCookie(name) {
+    const match = document.cookie.match(new RegExp(`(^| )${name}=([^;]+)`));
+    return match ? decodeURIComponent(match[2]) : null;
+}
+
+// ** Cookie’ye veri kaydetme fonksiyonu **
+function setCookie(name, value, days = 30) {
+    const expires = new Date();
+    expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+    document.cookie = `${name}=${encodeURIComponent(value)};expires=${expires.toUTCString()};path=/`;
+}
+
+// Range dolgusu (fill) güncelleme fonksiyonu
 function updateRangeFill() {
     const value =
-        ((rangeInput.value - rangeInput.min) / (rangeInput.max - rangeInput.min)) * 100;
+        ((rangeInput.value - rangeInput.min) / (rangeInput.max - rangeInput.min)) *
+        100;
     rangeInput.style.setProperty("--fill", `${value}%`);
 }
 
-// Range değeri için span içeriğini güncelleme fonksiyonu
+// Range değeri güncelleme fonksiyonu
 function updateRangeValue() {
-    rangeValueSpan.textContent = rangeInput.value;
+    rangeValueInput.value = rangeInput.value;
     updateRangeFill();
 }
 
-// Range inputu her değiştiğinde span'ı ve dolguyu güncelle
+// Input sadece sayı almalı
+rangeValueInput.addEventListener("keypress", (event) => {
+    if (!/^\d$/.test(event.key)) {
+        event.preventDefault();
+    }
+});
+
+// Input değeri değiştiğinde güncelle (Enter veya dışarı tıklama)
+function validateAndUpdateInput() {
+    let newValue = parseInt(rangeValueInput.value, 10);
+
+    // Girilen değeri 6-128 arasında sınırla
+    if (isNaN(newValue) || newValue < 6) newValue = 6;
+    if (newValue > 128) newValue = 128;
+
+    // Range ve input'u güncelle
+    rangeInput.value = newValue;
+    updateRangeValue();
+}
+
+// Enter basıldığında güncelle
+rangeValueInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        validateAndUpdateInput();
+        rangeValueInput.blur(); // Odağı kaldır
+    }
+});
+
+// Dışına tıklanınca güncelle
+rangeValueInput.addEventListener("blur", validateAndUpdateInput);
+
+// Range input değiştiğinde güncelle
 rangeInput.addEventListener("input", updateRangeValue);
 
 // Azaltma butonu
@@ -35,7 +85,7 @@ increaseButton.addEventListener("click", () => {
     }
 });
 
-// Azaltma butonuna basılı tutulduğunda 
+// Azaltma butonuna basılı tutulduğunda
 let decreaseInterval;
 decreaseButton.addEventListener("mousedown", () => {
     decreaseInterval = setInterval(() => {
@@ -46,7 +96,7 @@ decreaseButton.addEventListener("mousedown", () => {
     }, 100); // Her 100ms'de bir azalt
 });
 
-// Arttırma butonuna basılı tutulduğunda 
+// Arttırma butonuna basılı tutulduğunda
 let increaseInterval;
 increaseButton.addEventListener("mousedown", () => {
     increaseInterval = setInterval(() => {
@@ -66,15 +116,14 @@ document.addEventListener("mouseup", () => {
 // Sayfa yüklendiğinde başlangıç değerini güncelle
 window.addEventListener("load", updateRangeValue);
 
-
 const generateCopyButton = document.getElementById("generate-copy-button");
 const textToCopy = "DHCI749JeGebDHCI749JeGeb"; // Kopyalanacak metin
 
 generateCopyButton.addEventListener("click", (event) => {
     event.preventDefault();
 
-
-    navigator.clipboard.writeText(textToCopy)
+    navigator.clipboard
+        .writeText(textToCopy)
         .then(() => {
             generateCopyButton.textContent = "Copied!";
             setTimeout(() => {
@@ -84,8 +133,26 @@ generateCopyButton.addEventListener("click", (event) => {
         .catch((err) => {
             console.error("Kopyalama işlemi başarısız oldu: ", err);
         });
+    setCookieAll();
 });
 
+const savedButton = document.getElementById("saved-button");
+const checkIcon = document.getElementById("check-icon");
+const buttonText = document.getElementById("button-text");
+
+savedButton.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    // Tik SVG'sini göster
+    buttonText.classList.add("hidden");
+    checkIcon.classList.remove("hidden");
+
+    // 2 saniye sonra eski haline döndür
+    setTimeout(() => {
+        checkIcon.classList.add("hidden");
+        buttonText.classList.remove("hidden");
+    }, 2000);
+});
 
 const copyButton = document.getElementById("copy-button");
 const copiedButton = document.getElementById("copied-button");
@@ -118,16 +185,43 @@ function openModal() {
 
     if (modal.style.display === "flex") {
         content.style.display = "none";
-        skeleton.style.display = "block";
+        skeleton.style.display = "flex";
         setTimeout(() => {
             content.style.display = "block";
             skeleton.style.display = "none";
         }, 700);
     } else {
         modal.style.display = "flex";
-
-
     }
+    setCookieAll();
 }
 
+function setCookieAll() {
+    setCookie("passwordLength", rangeInput.value);
+    setCookie("includeUppercase", includeUppercase.checked);
+    setCookie("includeNumbers", includeNumbers.checked);
+    setCookie("includeSymbols", includeSymbols.checked);
+    setCookie("includeLowercase", includeLowercase.checked);
+    setCookie("excludeSimilar", excludeSimilar.checked);
+    setCookie("excludeAmbiguous", excludeAmbiguous.checked);
+}
 
+window.addEventListener("load", () => {
+    const passwordLength = getCookie("passwordLength");
+    const includeUppercaseChecked = getCookie("includeUppercase");
+    const includeNumbersChecked = getCookie("includeNumbers");
+    const includeSymbolsChecked = getCookie("includeSymbols");
+    const includeLowercaseChecked = getCookie("includeLowercase");
+    const excludeSimilarChecked = getCookie("excludeSimilar");
+    const excludeAmbiguousChecked = getCookie("excludeAmbiguous");
+
+    rangeInput.value = passwordLength || 12;
+    includeUppercase.checked = includeUppercaseChecked === "true";
+    includeNumbers.checked = includeNumbersChecked === "true";
+    includeSymbols.checked = includeSymbolsChecked === "true";
+    includeLowercase.checked = includeLowercaseChecked === "true";
+    excludeSimilar.checked = excludeSimilarChecked === "true";
+    excludeAmbiguous.checked = excludeAmbiguousChecked === "true";
+
+    updateRangeValue();
+});
