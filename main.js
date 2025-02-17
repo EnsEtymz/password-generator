@@ -8,6 +8,7 @@ const includeSymbols = document.getElementById("includeSymbols");
 const includeLowercase = document.getElementById("includeLowercase");
 const excludeSimilar = document.getElementById("excludeSimilar");
 const excludeAmbiguous = document.getElementById("excludeAmbiguous");
+const token = document.getElementById("token");
 
 function getCookie(name) {
     const match = document.cookie.match(new RegExp(`(^| )${name}=([^;]+)`));
@@ -204,6 +205,7 @@ function setCookieAll() {
     setCookie("includeLowercase", includeLowercase.checked);
     setCookie("excludeSimilar", excludeSimilar.checked);
     setCookie("excludeAmbiguous", excludeAmbiguous.checked);
+    setCookie("token", token.value);
 }
 
 window.addEventListener("load", () => {
@@ -214,6 +216,7 @@ window.addEventListener("load", () => {
     const includeLowercaseChecked = getCookie("includeLowercase");
     const excludeSimilarChecked = getCookie("excludeSimilar");
     const excludeAmbiguousChecked = getCookie("excludeAmbiguous");
+    const tokenValue = getCookie("token");
 
     rangeInput.value = passwordLength || 12;
     includeUppercase.checked = includeUppercaseChecked === "true";
@@ -222,6 +225,13 @@ window.addEventListener("load", () => {
     includeLowercase.checked = includeLowercaseChecked === "true";
     excludeSimilar.checked = excludeSimilarChecked === "true";
     excludeAmbiguous.checked = excludeAmbiguousChecked === "true";
+    token.value = tokenValue || "";
 
     updateRangeValue();
 });
+const saveSettingsButton = document.getElementById("save-settings-button");
+const settingsModal = document.getElementById("settings-modal");
+saveSettingsButton.addEventListener("click", () => {
+    setCookieAll();
+}
+);
