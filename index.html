@@ -88,7 +88,7 @@
                   <!-- Modal body -->
                   <form>
                     <div class="p-4 md:p-5">
-                      <div class="flex flex-col justify-start gap-3 mb-3">
+                      <div class="flex flex-col justify-start gap-3">
                         <input
                           type="text"
                           name="token"
@@ -136,7 +136,7 @@
                           >
                         </label>
                       </div>
-                      <div class="w-full flex justify-end">
+                      <div class="w-full flex justify-end mt-6">
                         <button
                           id="save-settings-button"
                           type="submit"
@@ -195,7 +195,7 @@
             </div>
           </div>
           <!-- Seçenekler -->
-          <div class="flex flex-col md:flex-row pb-4 gap-3 md:gap-24">
+          <div class="flex flex-col md:flex-row gap-3 md:gap-24">
             <div class="grid grid-cols gap-3">
               <label class="inline-flex items-center me-5 cursor-pointer">
                 <input
@@ -256,7 +256,7 @@
             </div>
           </div>
         </div>
-        <div class="flex gap-4 w-full pt-2">
+        <div class="flex gap-4 w-full mt-6">
           <button
             type="button"
             onclick="openModal()"
@@ -414,25 +414,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Tooltips -->
-    <!-- <div
-      id="tooltip-similar"
-      role="tooltip"
-      class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip"
-    >
-      (example: i, l, 1, L, o, 0, O)
-      <div class="tooltip-arrow" data-popper-arrow></div>
-    </div>
-    <div
-      id="tooltip-ambiguous"
-      role="tooltip"
-      class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip"
-    >
-      (example: {} [] () / \ ' " ` ~ , ; : . <>)
-      <div class="tooltip-arrow" data-popper-arrow></div>
-    </div> -->
-    <!-- Tooltips End -->
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.1/dist/flowbite.min.js"></script>
     <script src="./main.js"></script>
   </body>

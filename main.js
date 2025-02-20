@@ -9,6 +9,8 @@ const includeLowercase = document.getElementById("includeLowercase");
 const excludeSimilar = document.getElementById("excludeSimilar");
 const excludeAmbiguous = document.getElementById("excludeAmbiguous");
 const token = document.getElementById("token");
+const saveSettingsButton = document.getElementById("save-settings-button");
+const settingsModal = document.getElementById("settings-modal");
 
 function getCookie(name) {
     const match = document.cookie.match(new RegExp(`(^| )${name}=([^;]+)`));
@@ -209,13 +211,13 @@ function setCookieAll() {
 }
 
 window.addEventListener("load", () => {
-    const passwordLength = getCookie("passwordLength");
-    const includeUppercaseChecked = getCookie("includeUppercase");
-    const includeNumbersChecked = getCookie("includeNumbers");
-    const includeSymbolsChecked = getCookie("includeSymbols");
-    const includeLowercaseChecked = getCookie("includeLowercase");
-    const excludeSimilarChecked = getCookie("excludeSimilar");
-    const excludeAmbiguousChecked = getCookie("excludeAmbiguous");
+    const passwordLength = getCookie("passwordLength") ?? 12;
+    const includeUppercaseChecked = getCookie("includeUppercase")?? "true";
+    const includeNumbersChecked = getCookie("includeNumbers") ?? "true";
+    const includeSymbolsChecked = getCookie("includeSymbols") ?? "false";
+    const includeLowercaseChecked = getCookie("includeLowercase") ?? "true";
+    const excludeSimilarChecked = getCookie("excludeSimilar") ?? "true";
+    const excludeAmbiguousChecked = getCookie("excludeAmbiguous")??"true";
     const tokenValue = getCookie("token");
 
     rangeInput.value = passwordLength || 12;
@@ -229,9 +231,17 @@ window.addEventListener("load", () => {
 
     updateRangeValue();
 });
-const saveSettingsButton = document.getElementById("save-settings-button");
-const settingsModal = document.getElementById("settings-modal");
+
 saveSettingsButton.addEventListener("click", () => {
     setCookieAll();
 }
 );
+
+const observer = new MutationObserver(() => {
+    if (settingsModal.classList.contains("flex")) {
+        token.focus();
+    }
+});
+
+// Modalın sınıf değişikliklerini izlemeye başla
+observer.observe(settingsModal, { attributes: true, attributeFilter: ["class"] });
