@@ -12,10 +12,10 @@
     <link href="./style.css" rel="stylesheet" />
   </head>
 
-  <body class="bg-[#F0F2F5]">
-    <div class="flex flex-col items-center justify-center lg:pt-12">
+  <body class="bg-white md:bg-[#F0F2F5]">
+    <div class="flex flex-col items-center md:justify-center lg:pt-12">
       <div
-        class="bg-white p-8 rounded-lg shadow-lg w-full h-screen md:h-auto lg:w-1/2"
+        class="bg-white p-8 rounded-lg md:shadow-lg w-full md:h-auto lg:w-1/2"
       >
         <div class="w-full gap-4 border-b pb-4">
           <div class="flex justify-between items-center">
@@ -109,8 +109,7 @@
                           <div
                             class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-0 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-black"
                           ></div>
-                          <span
-                            class="ms-3 text-sm font-medium text-gray-500"
+                          <span class="ms-3 text-sm font-medium text-gray-500"
                             >Exclude Similar</span
                           >
                         </label>
@@ -126,8 +125,7 @@
                           <div
                             class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-0 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-black"
                           ></div>
-                          <span
-                            class="ms-3 text-sm font-medium text-gray-500"
+                          <span class="ms-3 text-sm font-medium text-gray-500"
                             >Exclude Ambiguous</span
                           >
                         </label>
@@ -278,7 +276,7 @@
     >
       <div
         id="password-content"
-        class="bg-white p-8 rounded-lg shadow-lg w-full lg:w-1/2 h-64"
+        class="bg-white p-8 rounded-lg md:shadow-lg w-full lg:w-1/2 h-64"
       >
         <div class="w-full gap-4 border-b pb-4">
           <div class="flex justify-between items-center">
@@ -351,19 +349,22 @@
             </button>
           </div>
         </div>
-        <div class="flex gap-4">
-          <div>
+        <div class="flex flex-col md:flex-row gap-4 items-center max-w-full">
+          <div
+            class="relative flex items-center w-full md:w-auto lg:max-w-full overflow-hidden"
+          >
             <input
               type="text"
-              id="success"
-              class="border border-gray-500 text-black placeholder-gray-500 text-sm rounded-md focus:ring-gray-500 focus:border-gray-500 block w-full p-2"
+              id="passwordNameInput"
+              class="border border-gray-500 text-black placeholder-gray-500 text-sm rounded-md focus:ring-gray-500 focus:border-gray-500 p-2 w-auto min-w-full md:min-w-44 max-w-full transition-all duration-200"
               placeholder="Password name"
             />
           </div>
+
           <button
             id="saved-button"
             type="submit"
-            class="w-36 text-sm font-semibold bg-[#34c75a] hover:bg-[#2aa24a] transition duration-200 text-white py-2 rounded-md text-center items-center"
+            class="w-full md:w-36 text-sm font-semibold bg-[#34c75a] hover:bg-[#2aa24a] transition duration-200 text-white py-2 rounded-md text-center flex items-center justify-center"
           >
             <span id="button-text">Save</span>
             <svg

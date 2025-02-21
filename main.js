@@ -11,6 +11,7 @@ const excludeAmbiguous = document.getElementById("excludeAmbiguous");
 const token = document.getElementById("token");
 const saveSettingsButton = document.getElementById("save-settings-button");
 const settingsModal = document.getElementById("settings-modal");
+const passwordNameInput = document.getElementById("passwordNameInput");
 
 function getCookie(name) {
     const match = document.cookie.match(new RegExp(`(^| )${name}=([^;]+)`));
@@ -243,5 +244,17 @@ const observer = new MutationObserver(() => {
     }
 });
 
-// Modalın sınıf değişikliklerini izlemeye başla
 observer.observe(settingsModal, { attributes: true, attributeFilter: ["class"] });
+
+function adjustInputWidth() {
+    const minWidth = 44; // px (md:min-w-44)
+    const maxWidth = 535; // px
+    const newWidth = Math.min((passwordNameInput.value.length + 1) * 8, maxWidth);
+    
+    passwordNameInput.style.width = newWidth + "px";
+    if (newWidth < minWidth) {
+      passwordNameInput.style.width = minWidth + "px";
+    }
+  }
+
+  passwordNameInput.addEventListener("input", adjustInputWidth);
